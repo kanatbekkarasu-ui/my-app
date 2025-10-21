@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft Universe - Полное руководство по игре</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+            overflow-x: hidden;
+        }
+        
+        /* Пиксельный фон */
+        .pixel-bg {
+            background-image: 
+                linear-gradient(45deg, #2d5016 25%, transparent 25%), 
+                linear-gradient(-45deg, #2d5016 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, #2d5016 75%), 
+                linear-gradient(-45deg, transparent 75%, #2d5016 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            animation: pixelMove 10s linear infinite;
+        }
+        
+        @keyframes pixelMove {
+            0% { background-position: 0 0, 0 10px, 10px -10px, -10px 0px; }
+            100% { background-position: 20px 20px, 20px 30px, 30px 10px, 10px 20px; }
+        }
+        
+        /* Блочная анимация */
+        .block-bounce {
+            animation: blockBounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes blockBounce {
+            0%, 100% { transform: translateY(0px) rotateY(0deg); }
+            25% { transform: translateY(-10px) rotateY(90deg); }
+            50% { transform: translateY(-20px) rotateY(180deg); }
+            75% { transform: translateY(-10px) rotateY(270deg); }
+        }
+        
+        /* Майнкрафт стиль текста */
+        .minecraft-text {
+            font-family: 'Courier New', monospace;
+            text-shadow: 2px 2px 0px #000000;
+            letter-spacing: 2px;
+        }
+        
+        /* Пиксельные кнопки */
+        .pixel-button {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            border: 4px solid #2e7d32;
+            box-shadow: 
+                inset 2px 2px 0px rgba(255,255,255,0.3),
+                inset -2px -2px 0px rgba(0,0,0,0.3),
+                4px 4px 0px #1b5e20;
+            transition: all 0.1s ease;
+        }
+        
+        .pixel-button:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 
+                inset 2px 2px 0px rgba(255,255,255,0.3),
+                inset -2px -2px 0px rgba(0,0,0,0.3),
+                2px 2px 0px #1b5e20;
+        }
+        
+        /* Анимация появления блоков */
+        .block-appear {
+            animation: blockAppear 0.8s ease-out forwards;
+            opacity: 0;
+            transform: scale(0) rotateY(180deg);
+        }
+        
+        @keyframes blockAppear {
+            0% {
+                opacity: 0;
+                transform: scale(0) rotateY(180deg);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2) rotateY(90deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotateY(0deg);
+            }
+        }
+        
+        /* Анимация крипера */
+        .creeper-shake {
+            animation: creeperShake 0.5s ease-in-out infinite;
+        }
+        
+        @keyframes creeperShake {
+            0%, 100% { transform: translateX(0px); }
+            25% { transform: translateX(-2px); }
+            75% { transform: translateX(2px); }
+        }
+        
+        /* Анимация взрыва */
+        .explosion {
+            animation: explosion 1s ease-out forwards;
+        }
+        
+        @keyframes explosion {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(2);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        /* Плавающие блоки */
+        .floating-block {
+            animation: floatingBlock 3s ease-in-out infinite;
+        }
+        
+        @keyframes floatingBlock {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(180deg); }
+        }
+        
+        /* Анимация печатания */
+        .typing-effect {
+            overflow: hidden;
+            border-right: 3px solid #4CAF50;
+            white-space: nowrap;
+            animation: typing 4s steps(50, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #4CAF50; }
+        }
+        
+        /* Волновой эффект */
+        .wave-animation {
+            animation: wave 2s ease-in-out infinite;
+        }
+        
+        @keyframes wave {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Светящийся эффект */
+        .glow-effect {
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { box-shadow: 0 0 20px rgba(76, 175, 80, 0.5); }
+            to { box-shadow: 0 0 30px rgba(76, 175, 80, 0.8); }
+        }
+        
+        /* Анимация карточек */
+        .card-flip {
+            perspective: 1000px;
+        }
+        
+        .card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .card-flip:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .card-front, .card-back {
+            backface-visibility: hidden;
+        }
+        
+        .card-back {
+            transform: rotateY(180deg);
+        }
+        
+        /* Задержки анимации */
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        .delay-4 { animation-delay: 0.8s; }
+        .delay-5 { animation-delay: 1s; }
+        .delay-6 { animation-delay: 1.2s; }
+        .delay-7 { animation-delay: 1.4s; }
+        .delay-8 { animation-delay: 1.6s; }
+        
+        /* Прокрутка с анимацией */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Интерактивные элементы */
+        .interactive-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .interactive-hover:hover {
+            transform: translateY(-5px) scale(1.05);
+            filter: brightness(1.2);
+        }
+    </style>
+</head>
+<body class="min-h-full bg-gradient-to-br from-green-900 via-emerald-800 to-teal-900 text-white pixel-bg">
+    
+    <!-- Плавающие блоки -->
+    <div class="fixed top-10 left-10 text-4xl floating-block delay-1">🟫</div>
+    <div class="fixed top-20 right-20 text-3xl floating-block delay-3">🟩</div>
+    <div class="fixed bottom-32 left-1/4 text-5xl floating-block delay-5">⬛</div>
+    <div class="fixed top-1/2 right-10 text-4xl floating-block delay-2">🟦</div>
+    
+    <header class="relative z-10 py-6 px-6 bg-black bg-opacity-30">
+        <nav class="container mx-auto">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4 block-appear">
+                    <div class="text-5xl block-bounce">🧱</div>
+                    <h1 class="text-3xl font-bold minecraft-text text-green-400">MINECRAFT UNIVERSE</h1>
+                </div>
+                <div class="hidden md:flex space-x-8 block-appear delay-1">
+                    <a href="#home" class="minecraft-text hover:text-green-400 transition-colors interactive-hover">ГЛАВНАЯ</a>
+                    <a href="#gameplay" class="minecraft-text hover:text-green-400 transition-colors interactive-hover">ГЕЙМПЛЕЙ</a>
+                    <a href="#mobs" class="minecraft-text hover:text-green-400 transition-colors interactive-hover">МОБЫ</a>
+                    <a href="#crafting" class="minecraft-text hover:text-green-400 transition-colors interactive-hover">КРАФТ</a>
+                    <a href="#worlds" class="minecraft-text hover:text-green-400 transition-colors interactive-hover">МИРЫ</a>
+                    <a href="#tips" class="minecraft-text hover:text-green-400 transition-colors interactive-hover">СОВЕТЫ</a>
+                </div>
+                <button id="mobile-menu" class="md:hidden text-3xl minecraft-text">☰</button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="py-20 px-6 relative overflow-hidden">
+            <div class="container mx-auto text-center">
+                <div class="text-9xl mb-8 block-bounce">⛏️</div>
+                <h2 class="text-7xl font-bold mb-6 minecraft-text text-green-400 glow-effect block-appear delay-1">
+                    MINECRAFT
+                </h2>
+                <div class="typing-effect text-3xl text-yellow-400 mb-8 mx-auto max-w-4xl minecraft-text delay-2">
+                    БЕСКОНЕЧНЫЙ МИР ПРИКЛЮЧЕНИЙ И ТВОРЧЕСТВА
+                </div>
+                <p class="text-xl text-gray-300 mb-10 max-w-4xl mx-auto minecraft-text scroll-reveal">
+                    Minecraft - это игра-песочница, которая позволяет игрокам строить конструкции из текстурированных кубов в 3D-мире. 
+                    Игра была создана Маркусом Перссоном в 2009 году и с тех пор стала одной из самых популярных игр в мире. 
+                    В Minecraft нет конкретных целей - игроки могут исследовать, строить, сражаться с монстрами и создавать 
+                    удивительные миры, ограниченные только их воображением.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center scroll-reveal delay-3">
+                    <button class="pixel-button text-white px-12 py-6 text-xl font-bold minecraft-text interactive-hover">
+                        НАЧАТЬ ИГРУ 🎮
+                    </button>
+                    <button class="pixel-button bg-blue-600 border-blue-800 text-white px-12 py-6 text-xl font-bold minecraft-text interactive-hover">
+                        СМОТРЕТЬ ВИДЕО 📹
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gameplay Section -->
+        <section id="gameplay" class="py-20 px-6 bg-black bg-opacity-40">
+            <div class="container mx-auto">
+                <h3 class="text-6xl font-bold text-center mb-8 minecraft-text text-blue-400 wave-animation">
+                    ГЕЙМПЛЕЙ И МЕХАНИКИ
+                </h3>
+                <p class="text-center text-gray-300 mb-16 text-xl minecraft-text">
+                    Изучите основные механики игры и станьте мастером Minecraft
+                </p>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card-flip interactive-hover scroll-reveal delay-1">
+                        <div class="card-inner relative bg-gradient-to-br from-brown-800 to-yellow-900 p-8 rounded-2xl border-4 border-yellow-600 glow-effect">
+                            <div class="card-front absolute inset-0 p-8">
+                                <div class="text-7xl mb-6 text-center block-bounce">⛏️</div>
+                                <h4 class="text-2xl font-bold text-yellow-400 mb-4 minecraft-text">ДОБЫЧА РЕСУРСОВ</h4>
+                                <p class="text-gray-300 minecraft-text">Копайте, рубите и собирайте материалы для строительства</p>
+                            </div>
+                            <div class="card-back absolute inset-0 p-8">
+                                <h4 class="text-xl font-bold text-yellow-400 mb-4 minecraft-text">ПОДРОБНЕЕ:</h4>
+                                <ul class="text-sm text-gray-300 space-y-2 minecraft-text">
+                                    <li>• Дерево - основной ресурс</li>
+                                    <li>• Камень для прочных построек</li>
+                                    <li>• Железо для инструментов</li>
+                                    <li>• Алмазы - самый ценный материал</li>
+                                    <li>• Редстоун для механизмов</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-flip interactive-hover scroll-reveal delay-2">
+                        <div class="card-inner relative bg-gradient-to-br from-green-800 to-emerald-900 p-8 rounded-2xl border-4 border-green-600 glow-effect">
+                            <div class="card-front absolute inset-0 p-8">
+                                <div class="text-7xl mb-6 text-center block-bounce">🏗️</div>
+                                <h4 class="text-2xl font-bold text-green-400 mb-4 minecraft-text">СТРОИТЕЛЬСТВО</h4>
+                                <p class="text-gray-300 minecraft-text">Создавайте удивительные постройки и сооружения</p>
+                            </div>
+                            <div class="card-back absolute inset-0 p-8">
+                                <h4 class="text-xl font-bold text-green-400 mb-4 minecraft-text">ВОЗМОЖНОСТИ:</h4>
+                                <ul class="text-sm text-gray-300 space-y-2 minecraft-text">
+                                    <li>• Дома и замки</li>
+                                    <li>• Фермы и заводы</li>
+                                    <li>• Города и деревни</li>
+                                    <li>• Пиксель-арт</li>
+                                    <li>• Функциональные механизмы</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-flip interactive-hover scroll-reveal delay-3">
+                        <div class="card-inner relative bg-gradient-to-br from-red-800 to-orange-900 p-8 rounded-2xl border-4 border-red-600 glow-effect">
+                            <div class="card-front absolute inset-0 p-8">
+                                <div class="text-7xl mb-6 text-center block-bounce">⚔️</div>
+                                <h4 class="text-2xl font-bold text-red-400 mb-4 minecraft-text">СРАЖЕНИЯ</h4>
+                                <p class="text-gray-300 minecraft-text">Сражайтесь с монстрами и защищайте свои постройки</p>
+                            </div>
+                            <div class="card-back absolute inset-0 p-8">
+                                <h4 class="text-xl font-bold text-red-400 mb-4 minecraft-text">ВРАГИ:</h4>
+                                <ul class="text-sm text-gray-300 space-y-2 minecraft-text">
+                                    <li>• Зомби и скелеты</li>
+                                    <li>• Криперы (взрывают блоки)</li>
+                                    <li>• Эндермены</li>
+                                    <li>• Боссы: Дракон Края</li>
+                                    <li>• Иссушитель</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-16 text-center scroll-reveal delay-4">
+                    <h4 class="text-4xl font-bold mb-8 minecraft-text text-purple-400">РЕЖИМЫ ИГРЫ</h4>
+                    <div class="grid md:grid-cols-4 gap-6">
+                        <div class="bg-gradient-to-br from-purple-800 to-pink-900 p-6 rounded-xl border-4 border-purple-600 interactive-hover">
+                            <div class="text-5xl mb-4 block-bounce">🏗️</div>
+                            <h5 class="text-xl font-bold text-purple-400 mb-2 minecraft-text">ТВОРЧЕСКИЙ</h5>
+                            <p class="text-gray-300 text-sm minecraft-text">Неограниченные ресурсы для строительства</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-orange-800 to-red-900 p-6 rounded-xl border-4 border-orange-600 interactive-hover">
+                            <div class="text-5xl mb-4 block-bounce">💀</div>
+                            <h5 class="text-xl font-bold text-orange-400 mb-2 minecraft-text">ВЫЖИВАНИЕ</h5>
+                            <p class="text-gray-300 text-sm minecraft-text">Добывайте ресурсы и сражайтесь за жизнь</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-gray-800 to-slate-900 p-6 rounded-xl border-4 border-gray-600 interactive-hover">
+                            <div class="text-5xl mb-4 block-bounce">🎯</div>
+                            <h5 class="text-xl font-bold text-gray-400 mb-2 minecraft-text">ПРИКЛЮЧЕНИЯ</h5>
+                            <p class="text-gray-300 text-sm minecraft-text">Играйте в созданные другими карты</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-blue-800 to-cyan-900 p-6 rounded-xl border-4 border-blue-600 interactive-hover">
+                            <div class="text-5xl mb-4 block-bounce">👥</div>
+                            <h5 class="text-xl font-bold text-blue-400 mb-2 minecraft-text">МУЛЬТИПЛЕЕР</h5>
+                            <p class="text-gray-300 text-sm minecraft-text">Играйте с друзьями на серверах</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mobs Section -->
+        <section id="mobs" class="py-20 px-6">
+            <div class="container mx-auto">
+                <h3 class="text-6xl font-bold text-center mb-8 minecraft-text text-red-400 wave-animation">
+                    МОБЫ И СУЩЕСТВА
+                </h3>
+                <p class="text-center text-gray-300 mb-16 text-xl minecraft-text">
+                    Познакомьтесь с удивительным миром существ Minecraft
+                </p>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-gradient-to-br from-green-800 to-lime-900 p-6 rounded-2xl border-4 border-green-600 interactive-hover scroll-reveal delay-1">
+                        <div class="text-6xl mb-4 text-center creeper-shake" onclick="explodeCreeper(this)">💚</div>
+                        <h4 class="text-2xl font-bold text-green-400 mb-3 minecraft-text">КРИПЕР</h4>
+                        <p class="text-gray-300 minecraft-text mb-4">Самый опасный моб, который взрывается при приближении к игроку</p>
+                        <div class="text-sm text-gray-400 minecraft-text">
+                            <p><strong>Здоровье:</strong> 20 HP</p>
+                            <p><strong>Урон:</strong> Взрыв (49 HP)</p>
+                            <p><strong>Дроп:</strong> Порох</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-gray-800 to-green-900 p-6 rounded-2xl border-4 border-gray-600 interactive-hover scroll-reveal delay-2">
+                        <div class="text-6xl mb-4 text-center block-bounce">🧟</div>
+                        <h4 class="text-2xl font-bold text-gray-400 mb-3 minecraft-text">ЗОМБИ</h4>
+                        <p class="text-gray-300 minecraft-text mb-4">Медленные, но опасные существа, появляющиеся ночью</p>
+                        <div class="text-sm text-gray-400 minecraft-text">
+                            <p><strong>Здоровье:</strong> 20 HP</p>
+                            <p><strong>Урон:</strong> 2.5-4.5 HP</p>
+                            <p><strong>Дроп:</strong> Гнилая плоть</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-white to-gray-300 p-6 rounded-2xl border-4 border-white interactive-hover scroll-reveal delay-3">
+                        <div class="text-6xl mb-4 text-center floating-block">💀</div>
+                        <h4 class="text-2xl font-bold text-gray-800 mb-3 minecraft-text">СКЕЛЕТ</h4>
+                        <p class="text-gray-800 minecraft-text mb-4">Лучник, стреляющий из лука на большие расстояния</p>
+                        <div class="text-sm text-gray-600 minecraft-text">
+                            <p><strong>Здоровье:</strong> 20 HP</p>
+                            <p><strong>Урон:</strong> 1-5 HP (стрелы)</p>
+                            <p><strong>Дроп:</strong> Кости, стрелы</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-black to-purple-900 p-6 rounded-2xl border-4 border-purple-600 interactive-hover scroll-reveal delay-4">
+                        <div class="text-6xl mb-4 text-center wave-animation">👁️</div>
+                        <h4 class="text-2xl font-bold text-purple-400 mb-3 minecraft-text">ЭНДЕРМЕН</h4>
+                        <p class="text-gray-300 minecraft-text mb-4">Таинственное существо, которое телепортируется</p>
+                        <div class="text-sm text-gray-400 minecraft-text">
+                            <p><strong>Здоровье:</strong> 40 HP</p>
+                            <p><strong>Урон:</strong> 4.5-7 HP</p>
+                            <p><strong>Дроп:</strong> Жемчуг Края</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-16 scroll-reveal delay-5">
+                    <h4 class="text-4xl font-bold text-center mb-8 minecraft-text text-yellow-400">ДРУЖЕЛЮБНЫЕ МОБЫ</h4>
+                    <div class="grid md:grid-cols-3 lg:grid-cols-6 gap-6">
+                        <div class="text-center interactive-hover">
+                            <div class="text-5xl mb-2 floating-block">🐄</div>
+                            <p class="minecraft-text text-yellow-400">КОРОВА</p>
+                            <p class="text-xs text-gray-400 minecraft-text">Молоко, кожа</p>
+                        </div>
+                        <div class="text-center interactive-hover">
+                            <div class="text-5xl mb-2 floating-block delay-1">🐷</div>
+                            <p class="minecraft-text text-pink-400">СВИНЬЯ</p>
+                            <p class="text-xs text-gray-400 minecraft-text">Свинина</p>
+                        </div>
+                        <div class="text-center interactive-hover">
+                            <div class="text-5xl mb-2 floating-block delay-2">🐑</div>
+                            <p class="minecraft-text text-white">ОВЦА</p>
+                            <p class="text-xs text-gray-400 minecraft-text">Шерсть</p>
+                        </div>
+                        <div class="text-center interactive-hover">
+                            <div class="text-5xl mb-2 floating-block delay-3">🐔</div>
+                            <p class="minecraft-text text-orange-400">КУРИЦА</p>
+                            <p class="text-xs text-gray-400 minecraft-text">Яйца, перья</p>
+                        </div>
+                        <div class="text-center interactive-hover">
+                            <div class="text-5xl mb-2 floating-block delay-4">🐺</div>
+                            <p class="minecraft-text text-gray-400">ВОЛК</p>
+                            <p class="text-xs text-gray-400 minecraft-text">Питомец</p>
+                        </div>
+                        <div class="text-center interactive-hover">
+                            <div class="text-5xl mb-2 floating-block delay-5">🐱</div>
+                            <p class="minecraft-text text-orange-300">КОТ</p>
+                            <p class="text-xs text-gray-400 minecraft-text">Питомец</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Crafting Section -->
+        <section id="crafting" class="py-20 px-6 bg-black bg-opacity-40">
+            <div class="container mx-auto">
+                <h3 class="text-6xl font-bold text-center mb-8 minecraft-text text-orange-400 wave-animation">
+                    СИСТЕМА КРАФТА
+                </h3>
+                <p class="text-center text-gray-300 mb-16 text-xl minecraft-text">
+                    Изучите рецепты и создавайте полезные предметы
+                </p>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-gradient-to-br from-brown-800 to-yellow-900 p-8 rounded-2xl border-4 border-brown-600 interactive-hover scroll-reveal delay-1">
+                        <h4 class="text-2xl font-bold text-yellow-400 mb-6 minecraft-text">ОСНОВНЫЕ ИНСТРУМЕНТЫ</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4 bg-black bg-opacity-30 p-3 rounded">
+                                <div class="text-3xl">⛏️</div>
+                                <div>
+                                    <p class="minecraft-text text-white font-bold">КИРКА</p>
+                                    <p class="text-xs text-gray-400 minecraft-text">3 палки + 3 материала</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 bg-black bg-opacity-30 p-3 rounded">
+                                <div class="text-3xl">🪓</div>
+                                <div>
+                                    <p class="minecraft-text text-white font-bold">ТОПОР</p>
+                                    <p class="text-xs text-gray-400 minecraft-text">2 палки + 3 материала</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 bg-black bg-opacity-30 p-3 rounded">
+                                <div class="text-3xl">🗡️</div>
+                                <div>
+                                    <p class="minecraft-text text-white font-bold">МЕЧ</p>
+                                    <p class="text-xs text-gray-400 minecraft-text">1 палка + 2 материала</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-gray-800 to-blue-900 p-8 rounded-2xl border-4 border-gray-600 interactive-hover scroll-reveal delay-2">
+                        <h4 class="text-2xl font-bold text-blue-400 mb-6 minecraft-text">БРОНЯ</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4 bg-black bg-opacity-30 p-3 rounded">
+                                <div class="text-3xl">🛡️</div>
+                                <div>
+                                    <p class="minecraft-text text-white font-bold">ШЛЕМ</p>
+                                    <p class="text-xs text-gray-400 minecraft-text">5 материалов</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 bg-black bg-opacity-30 p-3 rounded">
+                                <div class="text-3xl">👕</div>
+                                <div>
+                                    <p class="minecraft-text text-white font-bold">НАГРУДНИК</p>
+                                    <p class="text-xs text-gray-400 minecraft-text">8 материалов</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 bg-black bg-opacity-30 p-3 rounded">
+                                <div class="text-3xl">👖</div>
+                                <div>
+                                    <p class="minecraft-text text-white font-bold">ПОНОЖИ</p>
+                                    <p class="text-xs text-gray-400 minecraft-text">7 материалов</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-red-800 to-orange-900 p-8 rounded-2xl border-4 border-red-600 interactive-hover scroll-reveal delay-3">
+                        <h4 class="text-2xl font-bold text-red-400 mb-6 minecraft-text">ПОЛЕЗНЫЕ БЛОКИ</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4 bg-black bg-opacity-30 p-3 rounded">
+                                <div class="text-3xl">🔥</div>
+                                <div>
+                                    <p class="minecraft-text text-white font-bold">ПЕЧЬ</p>
+                                    <p class="text-xs text-gray-400 minecraft-text">8 булыжников</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 bg-black bg-opacity-30 p-3 rounded">
+                                <div class="text-3xl">📦</div>
+                                <div>
+                                    <p class="minecraft-text text-white font-bold">СУНДУК</p>
+                                    <p class="text-xs text-gray-400 minecraft-text">8 досок</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center space-x-4 bg-black bg-opacity-30 p-3 rounded">
+                                <div class="text-3xl">🛏️</div>
+                                <div>
+                                    <p class="minecraft-text text-white font-bold">КРОВАТЬ</p>
+                                    <p class="text-xs text-gray-400 minecraft-text">3 доски + 3 шерсти</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-16 text-center scroll-reveal delay-4">
+                    <button onclick="showCraftingTable()" class="pixel-button text-white px-12 py-6 text-xl font-bold minecraft-text interactive-hover">
+                        ОТКРЫТЬ ВЕРСТАК 🔨
+                    </button>
+                </div>
+                
+                <div id="crafting-table" class="hidden mt-12 bg-brown-800 p-8 rounded-2xl border-4 border-brown-600 max-w-2xl mx-auto">
+                    <h4 class="text-3xl font-bold text-center mb-6 minecraft-text text-yellow-400">ВЕРСТАК 3x3</h4>
+                    <div class="grid grid-cols-3 gap-2 mb-6">
+                        <div class="crafting-slot w-16 h-16 bg-gray-700 border-2 border-gray-500 rounded flex items-center justify-center text-2xl cursor-pointer" onclick="toggleSlot(this)"></div>
+                        <div class="crafting-slot w-16 h-16 bg-gray-700 border-2 border-gray-500 rounded flex items-center justify-center text-2xl cursor-pointer" onclick="toggleSlot(this)"></div>
+                        <div class="crafting-slot w-16 h-16 bg-gray-700 border-2 border-gray-500 rounded flex items-center justify-center text-2xl cursor-pointer" onclick="toggleSlot(this)"></div>
+                        <div class="crafting-slot w-16 h-16 bg-gray-700 border-2 border-gray-500 rounded flex items-center justify-center text-2xl cursor-pointer" onclick="toggleSlot(this)"></div>
+                        <div class="crafting-slot w-16 h-16 bg-gray-700 border-2 border-gray-500 rounded flex items-center justify-center text-2xl cursor-pointer" onclick="toggleSlot(this)"></div>
+                        <div class="crafting-slot w-16 h-16 bg-gray-700 border-2 border-gray-500 rounded flex items-center justify-center text-2xl cursor-pointer" onclick="toggleSlot(this)"></div>
+                        <div class="crafting-slot w-16 h-16 bg-gray-700 border-2 border-gray-500 rounded flex items-center justify-center text-2xl cursor-pointer" onclick="toggleSlot(this)"></div>
+                        <div class="crafting-slot w-16 h-16 bg-gray-700 border-2 border-gray-500 rounded flex items-center justify-center text-2xl cursor-pointer" onclick="toggleSlot(this)"></div>
+                        <div class="crafting-slot w-16 h-16 bg-gray-700 border-2 border-gray-500 rounded flex items-center justify-center text-2xl cursor-pointer" onclick="toggleSlot(this)"></div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">➡️</div>
+                        <div id="result-slot" class="w-20 h-20 bg-green-700 border-2 border-green-500 rounded flex items-center justify-center text-3xl mx-auto"></div>
+                        <p class="minecraft-text text-green-400 mt-2">РЕЗУЛЬТАТ</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Worlds Section -->
+        <section id="worlds" class="py-20 px-6">
+            <div class="container mx-auto">
+                <h3 class="text-6xl font-bold text-center mb-8 minecraft-text text-purple-400 wave-animation">
+                    ИЗМЕРЕНИЯ И МИРЫ
+                </h3>
+                <p class="text-center text-gray-300 mb-16 text-xl minecraft-text">
+                    Исследуйте различные измерения Minecraft
+                </p>
+                
+                <div class="grid md:grid-cols-3 gap-12">
+                    <div class="text-center scroll-reveal delay-1">
+                        <div class="bg-gradient-to-br from-green-600 to-blue-600 p-8 rounded-2xl border-4 border-green-400 interactive-hover mb-6">
+                            <div class="text-8xl mb-4 floating-block">🌍</div>
+                            <h4 class="text-3xl font-bold text-green-400 mb-4 minecraft-text">ОБЫЧНЫЙ МИР</h4>
+                        </div>
+                        <div class="text-left bg-black bg-opacity-30 p-6 rounded-xl">
+                            <p class="text-gray-300 minecraft-text mb-4">
+                                Основное измерение игры, где начинается ваше приключение. Здесь есть все биомы, 
+                                от пустынь до снежных гор, от океанов до джунглей.
+                            </p>
+                            <h5 class="text-lg font-bold text-green-400 mb-2 minecraft-text">ОСОБЕННОСТИ:</h5>
+                            <ul class="text-sm text-gray-400 space-y-1 minecraft-text">
+                                <li>• Смена дня и ночи</li>
+                                <li>• Погодные условия</li>
+                                <li>• Деревни жителей</li>
+                                <li>• Подземелья и шахты</li>
+                                <li>• Океанские памятники</li>
+                                <li>• Крепости и храмы</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center scroll-reveal delay-2">
+                        <div class="bg-gradient-to-br from-red-600 to-orange-600 p-8 rounded-2xl border-4 border-red-400 interactive-hover mb-6">
+                            <div class="text-8xl mb-4 floating-block">🔥</div>
+                            <h4 class="text-3xl font-bold text-red-400 mb-4 minecraft-text">НИЖНИЙ МИР</h4>
+                        </div>
+                        <div class="text-left bg-black bg-opacity-30 p-6 rounded-xl">
+                            <p class="text-gray-300 minecraft-text mb-4">
+                                Адское измерение, полное лавы и опасных мобов. Попасть сюда можно через портал 
+                                из обсидиана. Здесь время течет быстрее.
+                            </p>
+                            <h5 class="text-lg font-bold text-red-400 mb-2 minecraft-text">ОСОБЕННОСТИ:</h5>
+                            <ul class="text-sm text-gray-400 space-y-1 minecraft-text">
+                                <li>• Лавовые озера повсюду</li>
+                                <li>• Уникальные мобы (гасты, зомби-свинолюди)</li>
+                                <li>• Адский камень и кварц</li>
+                                <li>• Крепости Нижнего мира</li>
+                                <li>• Быстрое перемещение</li>
+                                <li>• Нет воды</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center scroll-reveal delay-3">
+                        <div class="bg-gradient-to-br from-purple-600 to-black p-8 rounded-2xl border-4 border-purple-400 interactive-hover mb-6">
+                            <div class="text-8xl mb-4 floating-block">🌌</div>
+                            <h4 class="text-3xl font-bold text-purple-400 mb-4 minecraft-text">КРАЙ</h4>
+                        </div>
+                        <div class="text-left bg-black bg-opacity-30 p-6 rounded-xl">
+                            <p class="text-gray-300 minecraft-text mb-4">
+                                Финальное измерение игры, где обитает Дракон Края - главный босс Minecraft. 
+                                Состоит из плавающих островов в пустоте.
+                            </p>
+                            <h5 class="text-lg font-bold text-purple-400 mb-2 minecraft-text">ОСОБЕННОСТИ:</h5>
+                            <ul class="text-sm text-gray-400 space-y-1 minecraft-text">
+                                <li>• Дракон Края - главный босс</li>
+                                <li>• Эндермены повсюду</li>
+                                <li>• Города Края с сокровищами</li>
+                                <li>• Элитры для полета</li>
+                                <li>• Хорус-фрукт</li>
+                                <li>• Бесконечная пустота</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tips Section -->
+        <section id="tips" class="py-20 px-6 bg-black bg-opacity-40">
+            <div class="container mx-auto">
+                <h3 class="text-6xl font-bold text-center mb-8 minecraft-text text-cyan-400 wave-animation">
+                    СОВЕТЫ И СТРАТЕГИИ
+                </h3>
+                <p class="text-center text-gray-300 mb-16 text-xl minecraft-text">
+                    Станьте мастером Minecraft с этими полезными советами
+                </p>
+                
+                <div class="grid md:grid-cols-2 gap-12">
+                    <div class="scroll-reveal delay-1">
+                        <h4 class="text-3xl font-bold text-yellow-400 mb-6 minecraft-text flex items-center">
+                            <span class="text-4xl mr-4 block-bounce">💡</span>
+                            СОВЕТЫ ДЛЯ НОВИЧКОВ
+                        </h4>
+                        <div class="space-y-4">
+                            <div class="bg-gradient-to-r from-yellow-800 to-orange-800 p-4 rounded-xl border-l-4 border-yellow-400 interactive-hover">
+                                <h5 class="font-bold text-yellow-300 mb-2 minecraft-text">1. ПЕРВАЯ НОЧЬ</h5>
+                                <p class="text-gray-300 text-sm minecraft-text">
+                                    Обязательно постройте укрытие до наступления ночи! Выкопайте пещеру в горе или 
+                                    постройте простой дом из земли. Ночью появляются монстры.
+                                </p>
+                            </div>
+                            <div class="bg-gradient-to-r from-green-800 to-emerald-800 p-4 rounded-xl border-l-4 border-green-400 interactive-hover">
+                                <h5 class="font-bold text-green-300 mb-2 minecraft-text">2. СОБИРАЙТЕ ДЕРЕВО</h5>
+                                <p class="text-gray-300 text-sm minecraft-text">
+                                    Дерево - самый важный ресурс в начале игры. Из него можно сделать инструменты, 
+                                    оружие и строительные материалы. Всегда носите с собой саженцы!
+                                </p>
+                            </div>
+                            <div class="bg-gradient-to-r from-blue-800 to-cyan-800 p-4 rounded-xl border-l-4 border-blue-400 interactive-hover">
+                                <h5 class="font-bold text-blue-300 mb-2 minecraft-text">3. КОПАЙТЕ ВНИЗ</h5>
+                                <p class="text-gray-300 text-sm minecraft-text">
+                                    Но не прямо под собой! Копайте лестницей или делайте 2 блока в ширину. 
+                                    Алмазы находятся на уровне Y=12 и ниже.
+                                </p>
+                            </div>
+                            <div class="bg-gradient-to-r from-purple-800 to-pink-800 p-4 rounded-xl border-l-4 border-purple-400 interactive-hover">
+                                <h5 class="font-bold text-purple-300 mb-2 minecraft-text">4. СОЗДАЙТЕ ФЕРМУ</h5>
+                                <p class="text-gray-300 text-sm minecraft-text">
+                                    Постройте ферму для выращивания пшеницы, моркови и картофеля. Это обеспечит 
+                                    вас едой и позволит разводить животных.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="scroll-reveal delay-2">
+                        <h4 class="text-3xl font-bold text-red-400 mb-6 minecraft-text flex items-center">
+                            <span class="text-4xl mr-4 block-bounce">⚔️</span>
+                            ПРОДВИНУТЫЕ СТРАТЕГИИ
+                        </h4>
+                        <div class="space-y-4">
+                            <div class="bg-gradient-to-r from-red-800 to-orange-800 p-4 rounded-xl border-l-4 border-red-400 interactive-hover">
+                                <h5 class="font-bold text-red-300 mb-2 minecraft-text">1. ЗАЧАРОВАНИЯ</h5>
+                                <p class="text-gray-300 text-sm minecraft-text">
+                                    Создайте стол зачарований и библиотеки для улучшения инструментов и оружия. 
+                                    Эффективность, Удача и Прочность - лучшие зачарования.
+                                </p>
+                            </div>
+                            <div class="bg-gradient-to-r from-indigo-800 to-purple-800 p-4 rounded-xl border-l-4 border-indigo-400 interactive-hover">
+                                <h5 class="font-bold text-indigo-300 mb-2 minecraft-text">2. РЕДСТОУН МЕХАНИЗМЫ</h5>
+                                <p class="text-gray-300 text-sm minecraft-text">
+                                    Изучите редстоун для создания автоматических ферм, ловушек и сложных механизмов. 
+                                    Начните с простых схем: двери, поршни, диспенсеры.
+                                </p>
+                            </div>
+                            <div class="bg-gradient-to-r from-teal-800 to-green-800 p-4 rounded-xl border-l-4 border-teal-400 interactive-hover">
+                                <h5 class="font-bold text-teal-300 mb-2 minecraft-text">3. ТОРГОВЛЯ С ЖИТЕЛЯМИ</h5>
+                                <p class="text-gray-300 text-sm minecraft-text">
+                                    Найдите деревню и торгуйте с жителями. Они могут дать вам редкие предметы 
+                                    в обмен на изумруды. Защищайте деревню от набегов!
+                                </p>
+                            </div>
+                            <div class="bg-gradient-to-r from-gray-800 to-slate-800 p-4 rounded-xl border-l-4 border-gray-400 interactive-hover">
+                                <h5 class="font-bold text-gray-300 mb-2 minecraft-text">4. ИССЛЕДОВАНИЕ</h5>
+                                <p class="text-gray-300 text-sm minecraft-text">
+                                    Исследуйте подземелья, крепости, храмы и океанские памятники. Там можно найти 
+                                    уникальные предметы и сокровища. Всегда берите с собой еду и оружие!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-16 text-center scroll-reveal delay-3">
+                    <h4 class="text-4xl font-bold mb-8 minecraft-text text-green-400">ДОСТИЖЕНИЯ</h4>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="bg-gradient-to-br from-yellow-800 to-orange-800 p-6 rounded-xl border-4 border-yellow-600 interactive-hover">
+                            <div class="text-5xl mb-4 block-bounce">🏆</div>
+                            <h5 class="text-lg font-bold text-yellow-400 mb-2 minecraft-text">ПОЛУЧИТЬ ДЕРЕВО</h5>
+                            <p class="text-gray-300 text-sm minecraft-text">Первое достижение в игре</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-blue-800 to-cyan-800 p-6 rounded-xl border-4 border-blue-600 interactive-hover">
+                            <div class="text-5xl mb-4 block-bounce">💎</div>
+                            <h5 class="text-lg font-bold text-blue-400 mb-2 minecraft-text">АЛМАЗЫ!</h5>
+                            <p class="text-gray-300 text-sm minecraft-text">Найдите алмазы</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-purple-800 to-pink-800 p-6 rounded-xl border-4 border-purple-600 interactive-hover">
+                            <div class="text-5xl mb-4 block-bounce">🐉</div>
+                            <h5 class="text-lg font-bold text-purple-400 mb-2 minecraft-text">КОНЕЦ?</h5>
+                            <p class="text-gray-300 text-sm minecraft-text">Убейте Дракона Края</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-green-800 to-emerald-800 p-6 rounded-xl border-4 border-green-600 interactive-hover">
+                            <div class="text-5xl mb-4 block-bounce">🏠</div>
+                            <h5 class="text-lg font-bold text-green-400 mb-2 minecraft-text">ДОМ МИЛЫЙ ДОМ</h5>
+                            <p class="text-gray-300 text-sm minecraft-text">Постройте дом</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-12 px-6 bg-black bg-opacity-60">
+        <div class="container mx-auto text-center">
+            <div class="flex items-center justify-center space-x-4 mb-6 block-appear">
+                <div class="text-5xl block-bounce">🧱</div>
+                <h5 class="text-3xl font-bold minecraft-text text-green-400">MINECRAFT UNIVERSE</h5>
+            </div>
+            <p class="text-gray-300 text-lg mb-8 minecraft-text">
+                Исследуйте, стройте, выживайте - ваше приключение только начинается!
+            </p>
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h6 class="text-lg font-bold mb-4 text-yellow-400 minecraft-text">ИГРОВЫЕ РЕЖИМЫ</h6>
+                    <ul class="space-y-2 text-gray-400 minecraft-text">
+                        <li>Выживание</li>
+                        <li>Творческий</li>
+                        <li>Приключения</li>
+                        <li>Хардкор</li>
+                    </ul>
+                </div>
+                <div>
+                    <h6 class="text-lg font-bold mb-4 text-blue-400 minecraft-text">ПЛАТФОРМЫ</h6>
+                    <ul class="space-y-2 text-gray-400 minecraft-text">
+                        <li>PC (Java Edition)</li>
+                        <li>Bedrock Edition</li>
+                        <li>Консоли</li>
+                        <li>Мобильные устройства</li>
+                    </ul>
+                </div>
+                <div>
+                    <h6 class="text-lg font-bold mb-4 text-purple-400 minecraft-text">СООБЩЕСТВО</h6>
+                    <ul class="space-y-2 text-gray-400 minecraft-text">
+                        <li>Моды и модпаки</li>
+                        <li>Серверы</li>
+                        <li>Карты приключений</li>
+                        <li>Ресурс-паки</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-600 pt-8">
+                <p class="text-gray-500 minecraft-text">© 2024 Minecraft Universe Guide. Создано с ❤️ для всех любителей Minecraft</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Анимация появления элементов при прокрутке
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Взрыв крипера
+        function explodeCreeper(element) {
+            element.innerHTML = '💥';
+            element.classList.add('explosion');
+            
+            // Создаем частицы взрыва
+            for (let i = 0; i < 10; i++) {
+                setTimeout(() => {
+                    createExplosionParticle(element);
+                }, i * 50);
+            }
+            
+            setTimeout(() => {
+                element.innerHTML = '💚';
+                element.classList.remove('explosion');
+            }, 2000);
+        }
+
+        function createExplosionParticle(parent) {
+            const particle = document.createElement('div');
+            particle.innerHTML = '💥';
+            particle.style.position = 'absolute';
+            particle.style.fontSize = '20px';
+            particle.style.pointerEvents = 'none';
+            particle.style.zIndex = '1000';
+            
+            const rect = parent.getBoundingClientRect();
+            particle.style.left = rect.left + 'px';
+            particle.style.top = rect.top + 'px';
+            
+            const angle = Math.random() * Math.PI * 2;
+            const distance = Math.random() * 100 + 50;
+            const endX = Math.cos(angle) * distance;
+            const endY = Math.sin(angle) * distance;
+            
+            particle.style.animation = `particle-explosion 1s ease-out forwards`;
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes particle-explosion {
+                    0% {
+                        transform: translate(0, 0) scale(1);
+                        opacity: 1;
+                    }
+                    100% {
+                        transform: translate(${endX}px, ${endY}px) scale(0);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.body.appendChild(particle);
+            
+            setTimeout(() => {
+                if (document.body.contains(particle)) {
+                    document.body.removeChild(particle);
+                }
+                if (document.head.contains(style)) {
+                    document.head.removeChild(style);
+                }
+            }, 1000);
+        }
+
+        // Верстак
+        function showCraftingTable() {
+            const table = document.getElementById('crafting-table');
+            table.classList.toggle('hidden');
+        }
+
+        const craftingMaterials = ['🟫', '🟩', '⬛', '🟦', '🟨', '🟪', '⬜'];
+        let currentMaterial = 0;
+
+        function toggleSlot(slot) {
+            if (slot.innerHTML === '') {
+                slot.innerHTML = craftingMaterials[currentMaterial];
+                slot.style.backgroundColor = '#4ade80';
+            } else {
+                slot.innerHTML = '';
+                slot.style.backgroundColor = '#374151';
+            }
+            checkCraftingRecipe();
+        }
+
+        function checkCraftingRecipe() {
+            const slots = document.querySelectorAll('.crafting-slot');
+            const pattern = Array.from(slots).map(slot => slot.innerHTML || '');
+            const resultSlot = document.getElementById('result-slot');
+            
+            // Простые рецепты
+            if (pattern.every(slot => slot === '🟫')) {
+                resultSlot.innerHTML = '📦';
+            } else if (pattern.filter(slot => slot === '🟫').length >= 3) {
+                resultSlot.innerHTML = '⛏️';
+            } else if (pattern.filter(slot => slot === '⬛').length >= 8) {
+                resultSlot.innerHTML = '🔥';
+            } else {
+                resultSlot.innerHTML = '';
+            }
+        }
+
+        // Смена материала для крафта
+        document.addEventListener('keydown', (e) => {
+            if (e.key >= '1' && e.key <= '7') {
+                currentMaterial = parseInt(e.key) - 1;
+            }
+        });
+
+        // Мобильное меню
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            // Простая реализация мобильного меню
+            alert('Мобильное меню - функция в разработке!');
+        });
+
+        // Случайные анимации блоков
+        setInterval(() => {
+            const floatingBlocks = document.querySelectorAll('.floating-block');
+            floatingBlocks.forEach(block => {
+                if (Math.random() > 0.8) {
+                    block.style.animation = 'none';
+                    setTimeout(() => {
+                        block.style.animation = 'floatingBlock 3s ease-in-out infinite';
+                    }, 100);
+                }
+            });
+        }, 3000);
+
+        // Эффект параллакса
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.floating-block');
+            
+            parallaxElements.forEach((element, index) => {
+                const speed = 0.3 + (index * 0.1);
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Инициализация
+        document.addEventListener('DOMContentLoaded', function() {
+            // Добавляем дополнительные анимации при загрузке
+            setTimeout(() => {
+                document.querySelectorAll('.block-appear').forEach((el, index) => {
+                    setTimeout(() => {
+                        el.style.animationDelay = (index * 0.2) + 's';
+                    }, index * 100);
+                });
+            }, 500);
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9918f9a4e059eec6',t:'MTc2MDk2ODEzMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
